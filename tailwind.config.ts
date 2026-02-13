@@ -1,4 +1,4 @@
-import type { Config } from "next";
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
@@ -9,24 +9,27 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        nunito: ['var(--font-nunito)'],
-        pacifico: ['var(--font-pacifico)'],
+        sans: ["var(--font-nunito)"],
+        serif: ["var(--font-lora)"],
+        playfair: ["var(--font-playfair)"],
+        "great-vibes": ["var(--font-great-vibes)"],
+        pacifico: ["var(--font-pacifico)"],
       },
       animation: {
-        'blob': 'blob 7s infinite',
-        'float': 'float 6s ease-in-out infinite',
+        blob: "blob 7s infinite",
+        float: "float 6s ease-in-out infinite",
       },
       keyframes: {
         blob: {
-          '0%': { transform: 'translate(0px, 0px) scale(1)' },
-          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-          '100%': { transform: 'translate(0px, 0px) scale(1)' },
+          "0%": { transform: "translate(0px, 0px) scale(1)" },
+          "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+          "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+          "100%": { transform: "translate(0px, 0px) scale(1)" },
         },
         float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-20px)' },
-        }
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
       },
     },
   },
