@@ -162,7 +162,7 @@ export default function BembuLand() {
             <RoyalCard name="Hunlu" role="The Queen" image="/bembu-land/images/her.jpg" />
             <RoyalCard name="Sahilu" role="The King" image="/bembu-land/images/me.jpg" />
             <RoyalCard name="Pogdi" role="Prince" image="/bembu-land/images/dog.jpg" />
-            <RoyalCard name="Future Bembu" role="The Legacy" image="//bembu-landimages/baby.jpg" />
+            <RoyalCard name="Future Bembu" role="The Legacy" image="/bembu-land/images/baby.jpg" />
           </div>
         </div>
 
