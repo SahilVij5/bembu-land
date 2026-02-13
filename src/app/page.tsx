@@ -68,9 +68,9 @@ export default function BembuLand() {
         {/* --- FILM STRIP --- */}
         <div className="w-screen relative left-[calc(-50vw+50%)] mb-16">
           <div className="flex gap-6 overflow-x-auto px-8 pb-8 no-scrollbar snap-x snap-mandatory">
-            <PhotoFrame src="/bembu-land/images/us.jpg" date="Since the start" caption="King & Queen" />
-            <PhotoFrame src="/bembu-land/images/dog.jpg" date="Pure Joy" caption="The Guardian" />
-            <PhotoFrame src="/bembu-land/images/her.jpg" date="My Heart" caption="Princess Bembu" />
+            <PhotoFrame src="/bembu-land/images/us.jpg" date="Since the start" caption="Sahilu and Hunlu" />
+            <PhotoFrame src="/bembu-land/images/dog.jpg" date="Pure Joy" caption="Our Baby" />
+            <PhotoFrame src="/bembu-land/images/her.jpg" date="My Heart" caption="Hunlu" />
             <div className="w-2 shrink-0"></div>
           </div>
           <div className="flex justify-center gap-2 mt-2">
@@ -155,14 +155,14 @@ export default function BembuLand() {
         <div className="w-full mb-12">
           <div className="flex items-center justify-center gap-4 mb-8">
              <div className="h-[1px] w-8 bg-red-200"></div>
-             <h2 className="text-center font-playfair text-3xl text-red-900">The Royal Court</h2>
+             <h2 className="text-center font-playfair text-3xl text-red-900">Member of Bembu Land</h2>
              <div className="h-[1px] w-8 bg-red-200"></div>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <RoyalCard name="Princess Bembu" role="The Queen" image="/bembu-land/images/her.jpg" />
-            <RoyalCard name="Bembu #2" role="The King" image="/bembu-land/images/me.jpg" />
-            <RoyalCard name="Bembu #3" role="The Guardian" image="/bembu-land/images/dog.jpg" />
-            <RoyalCard name="Bembu #4" role="The Legacy" image="//bembu-landimages/baby.jpg" />
+            <RoyalCard name="Hunlu" role="The Queen" image="/bembu-land/images/her.jpg" />
+            <RoyalCard name="Sahilu" role="The King" image="/bembu-land/images/me.jpg" />
+            <RoyalCard name="Pogdi" role="Prince" image="/bembu-land/images/dog.jpg" />
+            <RoyalCard name="Future Bembu" role="The Legacy" image="//bembu-landimages/baby.jpg" />
           </div>
         </div>
 
