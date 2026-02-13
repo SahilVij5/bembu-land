@@ -103,7 +103,7 @@ export default function ValentineGarden() {
               Every day with you feels like a page from a fairy tale I never want to end.
             </p>
             <p>
-              You are my home, my peace, and my greatest adventure. I love you more than code could ever compile, 
+              You are my home, my peace, and my greatest adventure. I love you 
               more than words could ever say, and more with every single heartbeat.
             </p>
             <p className="italic text-sm opacity-60">
