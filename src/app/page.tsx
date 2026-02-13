@@ -65,13 +65,19 @@ export default function BembuLand() {
             </motion.div>
         </header>
 
-        {/* --- FILM STRIP --- */}
+        {/* --- FILM STRIP (Fixed Centering) --- */}
         <div className="w-screen relative left-[calc(-50vw+50%)] mb-16">
-          <div className="flex gap-6 overflow-x-auto px-8 pb-8 no-scrollbar snap-x snap-mandatory">
+          {/* CHANGES MADE HERE:
+             1. Added 'px-[15vw]' (horizontal padding) to the scrolling container. 
+                This pushes the first item to the center of the screen initially.
+             2. Kept 'snap-x snap-mandatory' so it always locks to the center of an image.
+          */}
+          <div className="flex gap-6 overflow-x-auto pb-8 no-scrollbar snap-x snap-mandatory px-[15vw] md:px-[calc(50vw-175px)]">
             <PhotoFrame src="/bembu-land/images/us.jpg" date="Since the start" caption="Sahilu and Hunlu" />
             <PhotoFrame src="/bembu-land/images/dog.jpg" date="Pure Joy" caption="Our Baby" />
             <PhotoFrame src="/bembu-land/images/her.jpg" date="My Heart" caption="Hunlu" />
-            <div className="w-2 shrink-0"></div>
+            {/* Added a dummy spacer at the end to balance the scroll if needed, though padding usually handles it */}
+            <div className="w-1 shrink-0"></div>
           </div>
           <div className="flex justify-center gap-2 mt-2">
             <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 2, repeat: Infinity }} className="text-xs font-lora text-red-300 italic">
@@ -209,13 +215,11 @@ export default function BembuLand() {
   );
 }
 
-// --- FIXED COMPONENTS ---
+// --- COMPONENTS ---
 
 function PhotoFrame({ src, date, caption }: any) {
   return (
-    // FIX 1: Remove 'items-center' to prevent collapse
     <div className="snap-center shrink-0 w-[70vw] md:w-[350px] flex flex-col">
-      {/* FIX 2: Add 'w-full' to force width */}
       <div className="w-full bg-white p-3 pb-8 shadow-[0_10px_30px_rgba(0,0,0,0.1)] rotate-1 hover:rotate-0 transition-transform duration-500 border border-gray-100">
         <div className="h-[400px] w-full relative bg-gray-100">
           <Image src={src} alt={caption} fill className="object-cover" unoptimized />
