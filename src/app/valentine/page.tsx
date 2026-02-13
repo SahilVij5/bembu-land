@@ -3,91 +3,126 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowLeft, Heart } from 'lucide-react';
+import { ArrowLeft, Heart, Sparkles, Flower } from 'lucide-react';
 
 export default function ValentineGarden() {
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  
+  // Custom Flower Particles
+  const [flowers, setFlowers] = useState<{id: number, left: string, top: string, scale: number, type: string, duration: number}[]>([]);
+
+  useEffect(() => {
+    setMounted(true);
+    // Generate random flowers only on client side to prevent hydration errors
+    const flowerTypes = ["🌹", "🪷", "💮", "🌷"]; // Rose, Lotus (Lily-ish), Rajnigandhaish, Tulip
+    const newFlowers = [...Array(15)].map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      scale: Math.random() * 0.5 + 0.8,
+      type: flowerTypes[Math.floor(Math.random() * flowerTypes.length)],
+      duration: Math.random() * 20 + 10
+    }));
+    setFlowers(newFlowers);
+  }, []);
 
   if (!mounted) return null;
 
-  // Specific flowers requested: Rajnigandha (White Tuberose), Roses, Lillies
-  const flowers = [
-    { emoji: "🌹", id: 1 }, // Rose
-    { emoji: "🪷", id: 2 }, // Lily-ish / Lotus
-    { emoji: "🌺", id: 3 }, // Hibiscus/Generic
-    { emoji: "💮", id: 4 }, // Rajnigandha representation (White flower)
-    { emoji: "🌷", id: 5 }, // Tulip
-    { emoji: "🌹", id: 6 },
-    { emoji: "💮", id: 7 }, // Rajnigandha
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#ffeff4] to-[#ffe0ea] overflow-hidden relative font-nunito">
+    <div className="min-h-screen bg-[#FFFAFA] text-[#8B0000] overflow-hidden relative font-serif selection:bg-red-100">
       
-      {/* Falling Flowers Animation */}
+      {/* --- TEXTURE OVERLAY --- */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.03]" 
+           style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/cream-paper.png")` }}>
+      </div>
+
+      {/* --- FLOATING GARDEN ANIMATION --- */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        {[...Array(30)].map((_, i) => (
+        {flowers.map((f) => (
           <motion.div
-            key={i}
-            initial={{ y: -100, x: Math.random() * 100 + "vw", rotate: 0 }}
+            key={f.id}
+            initial={{ y: -100, x: -50, opacity: 0 }}
             animate={{ 
-              y: "110vh", 
-              rotate: 360,
-              x: `calc(${Math.random() * 100}vw + ${Math.random() * 50 - 25}px)` 
+              y: "120vh", 
+              x: 50,
+              opacity: [0, 1, 1, 0],
+              rotate: 360 
             }}
             transition={{ 
-              duration: Math.random() * 10 + 10, 
+              duration: f.duration, 
               repeat: Infinity, 
               ease: "linear",
               delay: Math.random() * 10
             }}
-            className="absolute text-4xl opacity-70"
+            className="absolute text-4xl filter drop-shadow-sm"
+            style={{ left: f.left, scale: f.scale }}
           >
-            {flowers[i % flowers.length].emoji}
+            {f.type}
           </motion.div>
         ))}
       </div>
 
-      <main className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 text-center">
+      <main className="relative z-10 flex flex-col items-center justify-center min-h-screen p-6 text-center">
         
-        {/* Back Button */}
+        {/* --- BACK BUTTON --- */}
         <Link href="/">
-          <motion.div whileHover={{ x: -5 }} className="absolute top-8 left-8 flex items-center gap-2 text-rose-400 font-bold cursor-pointer">
-            <ArrowLeft size={20} /> Back to Home
+          <motion.div 
+            whileHover={{ x: -5 }}
+            className="absolute top-8 left-6 flex items-center gap-2 text-red-300 font-bold text-xs tracking-widest uppercase cursor-pointer hover:text-red-800 transition-colors"
+          >
+            <ArrowLeft size={16} /> Return Home
           </motion.div>
         </Link>
 
+        {/* --- MAIN CARD --- */}
         <motion.div 
-          initial={{ scale: 0, opacity: 0 }}
+          initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1, type: "spring" }}
-          className="bg-white/40 backdrop-blur-xl border border-white/60 p-12 md:p-20 rounded-[3rem] shadow-2xl max-w-3xl"
+          className="bg-white/60 backdrop-blur-md border border-red-100 p-8 md:p-16 rounded-[3rem] shadow-[0_20px_60px_-15px_rgba(139,0,0,0.15)] max-w-lg relative"
         >
-          <div className="flex justify-center gap-4 mb-8">
-             {/* Rajnigandha & Rose Visuals */}
-             <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 2, repeat: Infinity }} className="text-6xl filter drop-shadow-lg">🌹</motion.div>
-             <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 2, repeat: Infinity, delay: 0.2 }} className="text-6xl filter drop-shadow-lg">💮</motion.div>
-             <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 2, repeat: Infinity, delay: 0.4 }} className="text-6xl filter drop-shadow-lg">🪷</motion.div>
+          {/* Decorative Top Icon */}
+          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 bg-red-900 rounded-full flex items-center justify-center shadow-xl border-4 border-[#FFFAFA]">
+             <Heart fill="#FFFAFA" className="text-red-900" size={32} />
           </div>
 
-          <h1 className="font-great-vibes text-7xl md:text-9xl text-rose-600 mb-6 drop-shadow-sm leading-tight">
-            Happy Valentine's<br/>Day
-          </h1>
+          <div className="mt-8 mb-6">
+             <h2 className="font-great-vibes text-6xl md:text-7xl text-red-900 mb-4 drop-shadow-sm">
+               She said Yes!
+             </h2>
+             <div className="w-16 h-[1px] bg-red-200 mx-auto mb-4"></div>
+             <p className="font-playfair text-xl text-red-800 font-bold">
+               Official Valentine: <br/>
+               <span className="text-3xl text-red-600">Hunlu ❤️</span>
+             </p>
+          </div>
           
-          <p className="text-slate-600 text-xl font-medium leading-relaxed max-w-lg mx-auto mb-10">
-            For the girl who deserves all the <span className="text-rose-500 font-bold">Roses</span>, 
-            <span className="text-pink-500 font-bold"> Lillies</span>, and 
-            <span className="text-slate-500 font-bold"> Rajnigandhas</span> in the world.
-          </p>
+          <div className="font-lora text-red-900/80 leading-relaxed text-lg space-y-4 mb-8">
+            <p>
+              This digital garden is filled with <span className="font-bold text-red-700">Roses</span> for your passion, 
+              <span className="font-bold text-pink-600"> Lilies</span> for your beauty, and 
+              <span className="font-bold text-slate-500"> Rajnigandhas</span> for your grace.
+            </p>
+            <p className="italic text-sm opacity-70">
+              (I tried to buy real ones, but they wither. This code lasts forever.)
+            </p>
+          </div>
 
-          <motion.button 
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="bg-rose-500 text-white px-10 py-4 rounded-full font-bold text-lg shadow-xl shadow-rose-300/50 flex items-center gap-3 mx-auto"
-          >
-            <Heart fill="white" /> I Love You Bembu
-          </motion.button>
+          <div className="flex justify-center gap-6 text-red-400">
+             <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 2 }}>🌹</motion.div>
+             <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 2, delay: 0.2 }}>🪷</motion.div>
+             <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 2, delay: 0.4 }}>💮</motion.div>
+          </div>
+
+          <div className="mt-10 pt-6 border-t border-red-100">
+             <p className="font-lora text-xs tracking-widest uppercase text-red-300 mb-2">
+               Your Forever Valentine
+             </p>
+             <p className="font-great-vibes text-4xl text-red-900">
+               Sahilu
+             </p>
+          </div>
+
         </motion.div>
 
       </main>
