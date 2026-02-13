@@ -3,19 +3,19 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowLeft, Heart, Sparkles, Flower } from 'lucide-react';
+import { ArrowLeft, Heart, Sparkles } from 'lucide-react';
 
 export default function ValentineGarden() {
   const [mounted, setMounted] = useState(false);
   
-  // Custom Flower Particles
+  // Custom Flower Particles (Visuals Only)
   const [flowers, setFlowers] = useState<{id: number, left: string, top: string, scale: number, type: string, duration: number}[]>([]);
 
   useEffect(() => {
     setMounted(true);
-    // Generate random flowers only on client side to prevent hydration errors
-    const flowerTypes = ["🌹", "🪷", "💮", "🌷"]; // Rose, Lotus (Lily-ish), Rajnigandhaish, Tulip
-    const newFlowers = [...Array(15)].map((_, i) => ({
+    // Floating elements: Roses, Sparkles, and Hearts
+    const flowerTypes = ["🌹", "✨", "❤️", "🌷"]; 
+    const newFlowers = [...Array(20)].map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
@@ -36,7 +36,7 @@ export default function ValentineGarden() {
            style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/cream-paper.png")` }}>
       </div>
 
-      {/* --- FLOATING GARDEN ANIMATION --- */}
+      {/* --- FLOATING ANIMATION --- */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {flowers.map((f) => (
           <motion.div
@@ -97,26 +97,23 @@ export default function ValentineGarden() {
              </p>
           </div>
           
-          <div className="font-lora text-red-900/80 leading-relaxed text-lg space-y-4 mb-8">
+          <div className="font-lora text-red-900/80 leading-relaxed text-lg space-y-6 mb-8">
             <p>
-              This digital garden is filled with <span className="font-bold text-red-700">Roses</span> for your passion, 
-              <span className="font-bold text-pink-600"> Lilies</span> for your beauty, and 
-              <span className="font-bold text-slate-500"> Rajnigandhas</span> for your grace.
+              In a world of temporary things, <span className="font-bold text-red-700">you are my forever</span>.
+              Every day with you feels like a page from a fairy tale I never want to end.
             </p>
-            <p className="italic text-sm opacity-70">
-              (I tried to buy real ones, but they wither. This code lasts forever.)
+            <p>
+              You are my home, my peace, and my greatest adventure. I love you more than code could ever compile, 
+              more than words could ever say, and more with every single heartbeat.
             </p>
-          </div>
-
-          <div className="flex justify-center gap-6 text-red-400">
-             <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 2 }}>🌹</motion.div>
-             <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 2, delay: 0.2 }}>🪷</motion.div>
-             <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 2, delay: 0.4 }}>💮</motion.div>
+            <p className="italic text-sm opacity-60">
+              (Official Status: Stuck with me. No refunds, no returns.)
+            </p>
           </div>
 
           <div className="mt-10 pt-6 border-t border-red-100">
              <p className="font-lora text-xs tracking-widest uppercase text-red-300 mb-2">
-               Your Forever Valentine
+               Yours Obsessively,
              </p>
              <p className="font-great-vibes text-4xl text-red-900">
                Sahilu
